@@ -1,0 +1,13 @@
+services:
+  letsfs-mcp:
+    build: .
+    container_name: letsfs-mcp
+    restart: unless-stopped
+    stdin_open: true
+    environment:
+      # Amadeus credentials (optional — enables live pricing)
+      LETSFS_AMADEUS_KEY: ${LETSFS_AMADEUS_KEY:-}
+      LETSFS_AMADEUS_SECRET: ${LETSFS_AMADEUS_SECRET:-}
+      LETSFS_AMADEUS_BASE: ${LETSFS_AMADEUS_BASE:-https://test.api.amadeus.com}
+      LETSFS_OVERPASS_URL: ${LETSFS_OVERPASS_URL:-https://overpass-api.de/api/interpreter}
+      LETSFS_NOMINATIM_URL: ${LETSFS_NOMINATIM_URL:-https://nominatim.openstreetmap.org}

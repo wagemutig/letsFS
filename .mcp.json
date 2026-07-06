@@ -1,0 +1,13 @@
+{
+  "letsfs": {
+    "command": "npx",
+    "args": ["-y", "letsfs-mcp"],
+    "env": {
+      "LETSFS_AMADEUS_KEY": "${LETSFS_AMADEUS_KEY}",
+      "LETSFS_AMADEUS_SECRET": "${LETSFS_AMADEUS_SECRET}"
+    },
+    "description": "Hotel search for AI agents. Free OSM discovery (Nominatim + Overpass). Optional Amadeus live pricing. No API key required for discovery.",
+    "homepage": "https://github.com/wagemutig/letsFS",
+    "repository": "https://github.com/wagemutig/letsFS"
+  }
+}

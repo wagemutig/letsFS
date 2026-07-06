@@ -1,0 +1,71 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "letsfs"
+version = "0.1.0"
+description = "Hotel search SDK for AI agents. Free, worldwide hotel discovery via OpenStreetMap (Nominatim + Overpass). Optional live pricing via Amadeus."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "letsFS"},
+]
+keywords = [
+    "hotels", "travel", "booking", "agent", "ai", "cli",
+    "autonomous", "mcp", "openai", "openstreetmap", "overpass",
+    "nominatim", "amadeus", "hotel-search",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Internet :: WWW/HTTP",
+]
+
+# Core has zero runtime dependencies — urllib is stdlib.
+# typer + rich are only needed for the CLI; they are pulled in via the `cli` extra.
+dependencies = []
+
+[project.optional-dependencies]
+cli = [
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "click>=8.0,<8.2",
+]
+dev = [
+    "pytest>=7.0",
+]
+
+[project.scripts]
+letsfs = "letsfs.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/letsfs/letsFS"
+Repository = "https://github.com/letsfs/letsFS"
+Issues = "https://github.com/letsfs/letsFS/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "live: test performs real network calls. Excluded from the deterministic gate (`pytest -m \"not live\"`); run on demand.",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["letsfs"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "__pycache__/",
+    ".pytest_cache/",
+    "dist/",
+    "build/",
+    "*.egg-info/",
+]

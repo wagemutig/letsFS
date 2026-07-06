@@ -1,0 +1,50 @@
+{
+  "name": "letsfs-mcp",
+  "version": "0.1.0",
+  "type": "commonjs",
+  "mcpName": "io.github.letsfs/letsfs",
+  "description": "letsFS MCP Server — hotel search via OpenStreetMap (Overpass) with optional Amadeus live pricing. Hotel discovery for Claude, Cursor, Windsurf, and any MCP agent. Free discovery, no API key required.",
+  "main": "dist/index.js",
+  "bin": {
+    "letsfs-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs --clean",
+    "start": "node dist/index.js",
+    "test": "tsx --test src/index.test.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "cursor",
+    "ai-agent",
+    "hotels",
+    "travel",
+    "booking",
+    "openstreetmap",
+    "amadeus",
+    "overpass"
+  ],
+  "author": "letsFS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/letsFS/letsFS.git"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

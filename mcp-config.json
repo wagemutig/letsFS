@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "letsfs": {
+      "command": "npx",
+      "args": ["-y", "letsfs-mcp"],
+      "env": {
+        "LETSFS_AMADEUS_KEY": "YOUR_AMADEUS_KEY (optional — only needed for live pricing)",
+        "LETSFS_AMADEUS_SECRET": "YOUR_AMADEUS_SECRET (optional)"
+      }
+    }
+  }
+}

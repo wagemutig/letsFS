@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  mcp-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: sdk/mcp/package-lock.json
+
+      - name: Install & Build MCP Server
+        working-directory: sdk/mcp
+        run: |
+          npm ci
+          npm run build
+
+      - name: Verify MCP protocol
+        working-directory: sdk/mcp
+        run: |
+          echo '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"ci","version":"1.0"}}}' | node dist/index.js | jq -e '.result.serverInfo.name == "letsfs"'
+
+  python-sdk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Verify Python SDK imports
+        working-directory: sdk/python
+        run: |
+          pip install -e .
+          python -c "from letsfs import LetsFS; LetsFS()"
+          python -m letsfs --version
